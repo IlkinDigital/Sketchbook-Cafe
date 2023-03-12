@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CanvasBrush : MonoBehaviour
 {
-    [SerializeField] private Transform tip;
+    [SerializeField] private Transform tip = null;
     [SerializeField] private int penSize = 5;
 
     private Renderer renderer;
@@ -20,6 +20,10 @@ public class CanvasBrush : MonoBehaviour
 
     void Start()
     {
+        if (tip == null)
+        {
+            tip = GameObject.FindGameObjectWithTag("Tip").transform;
+        }
         renderer = tip.GetComponent<Renderer>();
         colors = Enumerable.Repeat(renderer.material.color, penSize * penSize).ToArray();
         tipHeight = tip.localScale.y * transform.localScale.y;
